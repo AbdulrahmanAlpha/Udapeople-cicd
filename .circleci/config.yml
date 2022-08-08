@@ -39,13 +39,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-depes]
+          keys:  [frontend-depes]
       - run:
           name: Build front-end
           command: |
             cd frontend
             npm install 
-            npm run bulid 
+            npm run build 
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-depes
