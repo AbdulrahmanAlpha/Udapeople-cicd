@@ -10,6 +10,7 @@ commands:
             event: fail
             channel: a-project 
             template: basic_fail_1
+    
     install_awscli:
        description: Install AWS CLI 
        steps: 
@@ -38,6 +39,7 @@ commands:
           type: string
           default: ${CIRCLE_WORKFLOW_ID:0:7}
       steps:
+        - install_awscli
         - run:
            name: Destroy environments
            when: on_fail
