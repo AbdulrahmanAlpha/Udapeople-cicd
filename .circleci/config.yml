@@ -36,7 +36,7 @@ commands:
       parameters:
        WorkFlow-ID:
           type: string
-          default: ${CIRCLE_WORKFLOW_ID:0:7}
+          default: ${CIRCLE_WORKFLOW_ID}
       steps:
         - run:
            name: Destroy environments
