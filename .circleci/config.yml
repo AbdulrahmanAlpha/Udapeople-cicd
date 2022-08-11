@@ -207,23 +207,23 @@ jobs:
       - destroy-environment
       # Here's where you will add some code to rollback on failure      
 
-  # configure-infrastructure:
-  #   docker:
-  #     - image: cimg/base:stable
-  #   steps:
-  #     - checkout
-  #     # Add ssh keys with fingerprint
-  #     - add_ssh_keys:
-  #         fingerprints: ["eb:1d:54:01:87:85:02:2a:67:93:c2:05:21:c5:52:b4"]
-  #     - attach_workspace:
-  #         at: ~/
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #            cd .circleci/ansible
-  #            cat inventory.txt 
-  #            ansible-playbook -i inventory.txt configure-server.yml 
-  #     - destroy-environment
+  configure-infrastructure:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - install_ansible
+      - add_ssh_keys:
+          fingerprints: ["eb:1d:54:01:87:85:02:2a:67:93:c2:05:21:c5:52:b4"]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Configure server
+          command: |
+             cd .circleci/ansible
+             cat inventory.txt 
+             ansible-playbook -i inventory.txt configure-server.yml 
+      - destroy-environment
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
@@ -371,8 +371,8 @@ workflows:
           filters:
             branches:
               only: [main]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
