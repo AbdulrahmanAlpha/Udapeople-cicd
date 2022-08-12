@@ -19,6 +19,7 @@ commands:
             command: |
               sudo apt update
               sudo apt install awscli -y
+              
     install_ansible:
         description: Install ansible 
         steps:
@@ -26,10 +27,19 @@ commands:
               name:  install ansible 
               command: |
                sudo apt update
-               sudo apt install software-properties-common
+               sudo apt install software-properties-common -y
                sudo add-apt-repository --yes --update ppa:ansible/ansible
-               sudo apt install ansible 
+               sudo apt install ansible -y
     
+    install_nodejs:
+        description: Install nodejs 13 
+        steps: 
+          - run: 
+              name:  Install Node.JS 13 
+              command: | 
+                 curl -fsSL https://deb.nodesource.com/steup_13.x | sudo -E bash - 
+                 sudo apt install -y nodejs
+
     destroy-environment:
       description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
       parameters:
