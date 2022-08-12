@@ -32,13 +32,15 @@ commands:
                sudo apt install ansible -y
     
     install_nodejs:
-        description: Install nodejs 13 
+        description: Install nodejs 
         steps: 
           - run: 
-              name:  Install Node.JS 13 
+              name:  Install Node.JS 
               command: | 
-                 curl -fsSL https://deb.nodesource.com/steup_13.x | sudo -E bash - 
-                 sudo apt install -y nodejs
+                 sudo apt update
+                 sudo apt install nodejs
+                 sudo apt install npm
+
 
     destroy-environment:
       description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
