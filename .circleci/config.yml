@@ -158,7 +158,7 @@ jobs:
       - restore_cache:
           keys: [backend-depes]
       - run:
-          name: Back-end Unit test
+          name: Back-end Scan 
           command: |
             cd backend
             npm install
