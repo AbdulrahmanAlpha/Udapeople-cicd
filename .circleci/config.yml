@@ -360,21 +360,6 @@ jobs:
       - install_awscli
       - install_nodejs
       - run:
-          name: Backend smoke test.
-          command: |
-            BACKEND_PUBLIC_IP=&(aws ec2 describe-instances \
-            --filters "Name=tag:Name, Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text)
-
-            export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-            if curl -s $API_URL/api/status | grep "ok"
-            then 
-              exit 0 
-            else 
-              exit 1 
-            fi
-      - run:
           name: Frontend smoke test.
           command: |
             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
@@ -384,6 +369,24 @@ jobs:
             else 
               exit 2 
             fi
+
+      - run:
+          name: Backend smoke test.
+          command: |
+            BACKEND_PUBLIC_IP=&(aws ec2 describe-instances \
+            --filters "Name=tag:Name, Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text)
+
+            export API_URL="http://${BACKEND_PUBLIC_IP}:3030"
+            echo API_URL = $API_URL
+            if curl -s ${API_URL}/api/status | grep "ok"
+            then 
+              exit 0 
+            else 
+              exit 1 
+            fi
+
       - destroy-environment
       - revert-migrations
       # Here's where you will add some code to rollback on failure  
