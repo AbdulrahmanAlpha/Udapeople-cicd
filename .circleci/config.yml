@@ -373,7 +373,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-            BACKEND_PUBLIC_IP=&(tail -1 .circleci/ansible/inventory.txt)
+            export BACKEND_PUBLIC_IP=&(tail -1 .circleci/ansible/inventory.txt)
 
             export API_URL =http://${BACKEND_PUBLIC_IP}:3030
             echo "${API_URL}"
