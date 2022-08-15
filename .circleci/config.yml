@@ -270,7 +270,7 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
             
-            echo "API_URL =https://${BACKENDIP}:22" >> frontend/.env 
+            echo "API_URL =https://${BACKENDIP}:3030" >> frontend/.env 
             cat frontend/.env 
       - run:
           name: Deploy frontend objects
@@ -365,7 +365,7 @@ jobs:
              --query 'Reservations[*].Instances[*].PublicIpAddress' \
              --output text)
 
-            export API_URL=http://${BACKENDIP}:22
+            export API_URL=http://${BACKENDIP}:3030
             echo "${API_URL}"
             if curl -s $API_URL/api/status | grep "ok"
             then 
