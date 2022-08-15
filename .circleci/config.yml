@@ -390,13 +390,16 @@ jobs:
 
 #   cloudfront-update:
 #     docker:
-#       # Docker image here that supports AWS CLI
+#       - image: cimg/base:stable 
 #     steps:
 #       # Checkout code from git
 #       - run:
 #           name: Install dependencies
 #           command: |
-#             # your code here
+#             export OLD_WORKFLOW_ID = $(aws cloudformation \
+#                             list-exports --query"Exports[?Name==\'WorkFlowID\'].Value \
+#                             --no-paginate --output text)
+#             echo "Old Workflow ID: $OLD_WORKFLOW_ID"
 #       - run:
 #           name: Update cloudfront distribution
 #           command: |
