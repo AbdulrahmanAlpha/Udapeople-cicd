@@ -29,7 +29,7 @@
 - name:  start app
   command:  pm2 start main.js
   args:
-       chdir: ~/backend/dist
+       chdir: ~/backend-app/dist
   environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: “{{ lookup('env', 'TYPEORM_CONNECTION') }}”
