@@ -18,7 +18,6 @@
   shell: |
      cd ~/backend-app/dist
      pm2 stop default
-     pm2 start main.js
   
   register: execute_node
 
