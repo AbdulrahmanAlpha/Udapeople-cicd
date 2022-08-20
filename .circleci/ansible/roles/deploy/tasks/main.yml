@@ -1,22 +1,22 @@
 ---
 - name: "Creates backend app directory"
   file:
-    path: ~/backend-app
+    path: /home/ubuntu/backend-app
     state: directory
 
 - name: "Unarchive backend files "
   unarchive:
      src: artifact.tar.gz
-     dest: ~/backend-app 
+     dest: /home/ubuntu/backend-app 
 
 - name: "Installing Node Dependencies"
   shell: |
-     cd ~/backend-app
+     cd /home/ubuntu/backend-app
      npm i 
     
 - name: "Executing Node app with PM2"
   args:
-       chdir: ~/backend-app/dist
+       chdir: /home/ubuntu/backend-app/dist
   environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: “{{ lookup('env', 'TYPEORM_CONNECTION') }}”
