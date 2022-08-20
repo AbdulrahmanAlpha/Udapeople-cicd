@@ -19,15 +19,15 @@
        chdir: /home/ubuntu/backend-app/dist
   environment:
       ENVIRONMENT: production
-      TYPEORM_CONNECTION: “{{ lookup('env', 'TYPEORM_CONNECTION') }}”
-      TYPEORM_MIGRATIONS_DIR: “./migrations”
-      TYPEORM_MIGRATIONS: “./migrations/*.js”
-      TYPEORM_ENTITIES: “./modules/domain/**/*.entity.js”
-      TYPEORM_HOST: “{{ lookup('env', 'TYPEORM_HOST') }}”
-      TYPEORM_PORT: “{{ lookup('env', 'TYPEORM_PORT') }}”
-      TYPEORM_USERNAME: “{{ lookup('env', 'TYPEORM_USERNAME') }}”
-      TYPEORM_PASSWORD: “{{ lookup('env', 'TYPEORM_PASSWORD') }}”
-      TYPEORM_DATABASE: “{{ lookup('env', 'TYPEORM_DATABASE') }}”
+      TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
+      TYPEORM_MIGRATIONS_DIR: "./migrations"
+      TYPEORM_MIGRATIONS: "./migrations/*.js"
+      TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
+      TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
+      TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
+      TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
+      TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
+      TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
   shell: |
      pm2 stop default
      pm2 start main.js  
@@ -38,15 +38,15 @@
 #        chdir: ~/backend-app/dist
 #   environment:
 #       ENVIRONMENT: production
-#       TYPEORM_CONNECTION: “{{ lookup('env', 'TYPEORM_CONNECTION') }}”
-#       TYPEORM_MIGRATIONS_DIR: “./migrations”
-#       TYPEORM_MIGRATIONS: “./migrations/*.js”
-#       TYPEORM_ENTITIES: “./modules/domain/**/*.entity.js”
-#       TYPEORM_HOST: “{{ lookup('env', 'TYPEORM_HOST') }}”
-#       TYPEORM_PORT: “{{ lookup('env', 'TYPEORM_PORT') }}”
-#       TYPEORM_USERNAME: “{{ lookup('env', 'TYPEORM_USERNAME') }}”
-#       TYPEORM_PASSWORD: “{{ lookup('env', 'TYPEORM_PASSWORD') }}”
-#       TYPEORM_DATABASE: “{{ lookup('env', 'TYPEORM_DATABASE') }}”
+#       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
+#       TYPEORM_MIGRATIONS_DIR: "./migrations"
+#       TYPEORM_MIGRATIONS: "./migrations/*.js"
+#       TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
+#       TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
+#       TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
+#       TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
+#       TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
+#       TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
 - name: "Configure pm2 to start as service "
   become: true
   shell: |
