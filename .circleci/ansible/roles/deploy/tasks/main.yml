@@ -15,18 +15,17 @@
      npm i 
     
 - name: "Executing Node app with PM2"
-  args:
-       chdir: /home/ubuntu/backend-app/dist
   shell: |
+     cd /home/ubuntu/backend-app/dist
      export TYPEORM_CONNECTION=postgres
-     export TYPEORM_MIGRATIONS_DIR=./src/migrations
-     export TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts
-     export TYPEORM_MIGRATIONS=./src/migrations/*.ts
+     export TYPEORM_MIGRATIONS_DIR="./src/migrations"
+     export TYPEORM_ENTITIES="./src/modules/domain/**/*.entity.ts"
+     export TYPEORM_MIGRATIONS="./src/migrations/*.ts"
      export TYPEORM_HOST=udapeople-db.cvgecfuhx8it.us-east-1.rds.amazonaws.com
      export TYPEORM_PORT=5432
-     export TYPEORM_USERNAME=postgres
-     export TYPEORM_PASSWORD=vun1RzJq08mp0vTQetCY
-     export TYPEORM_DATABASE=glee
+     export TYPEORM_USERNAME="postgres"
+     export TYPEORM_PASSWORD="vun1RzJq08mp0vTQetCY"
+     export TYPEORM_DATABASE="glee"
      pm2 stop default
      pm2 start main.js  
   register: execute_node
