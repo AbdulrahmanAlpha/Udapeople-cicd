@@ -390,34 +390,34 @@ jobs:
       - revert-migrations
       # Here's where you will add some code to rollback on failure  
 
-#   cloudfront-update:
-#     docker:
-#       - image: cimg/base:stable 
-#     steps:
-#       - checkout
-        # - run:
-        #   name: install_awscli
-        #   command: |
-        #       sudo apt update
-        #       sudo apt install awscli -y
-        # - install_nodejs
-#       - run:
-#           name: Save Old Workflow ID TO Kvdb.io
-#           command: |
-#             export OLD_WORKFLOW_ID = $(aws cloudformation \
-#                             list-exports --query"Exports[?Name==\'WorkFlowID\'].Value \
-#                             --no-paginate --output text)
-#             echo "Old Workflow ID: $OLD_WORKFLOW_ID"
-#             curl https://kvdb.io/${KVDB_BUCKET}/old_workflow_id -d "${OLD_WORKFLOW_ID}"
-#       - run:
-#           name: Update cloudfront distribution
-#           command: |
-#             aws cloudformation deploy \
-#              --template-file .circleci/files/cloudfront.yml \
-#              -- parameter overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
-#              --stack-name InitialStack 
-#       - destroy-environment
-#       - revert-migrations
+  cloudfront-update:
+    docker:
+      - image: cimg/base:stable 
+    steps:
+      - checkout
+      - run:
+         name: install_awscli
+         command: |
+              sudo apt update
+              sudo apt install awscli -y
+      - install_nodejs
+      - run:
+          name: Save Old Workflow ID TO Kvdb.io
+          command: |
+            export OLD_WORKFLOW_ID = $(aws cloudformation \
+                            list-exports --query"Exports[?Name==\'WorkFlowID\'].Value \
+                            --no-paginate --output text)
+            echo "Old Workflow ID: $OLD_WORKFLOW_ID"
+            curl https://kvdb.io/${KVDB_BUCKET}/old_workflow_id -d "${OLD_WORKFLOW_ID}"
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            aws cloudformation deploy \
+             --template-file .circleci/files/cloudfront.yml \
+             -- parameter overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
+             --stack-name InitialStack 
+      - destroy-environment
+      - revert-migrations
 
 # cleanup:
 #     docker:
