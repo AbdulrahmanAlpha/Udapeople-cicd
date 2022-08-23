@@ -15,8 +15,9 @@
      npm i 
     
 - name: "Executing Node app with PM2"
+  args:
+       chdir: /home/ubuntu/backend-app/dist
   shell: |
-     cd /home/ubuntu/backend-app/dist
      export TYPEORM_CONNECTION=postgres
      export TYPEORM_MIGRATIONS_DIR="./src/migrations"
      export TYPEORM_ENTITIES="./src/modules/domain/**/*.entity.ts"
