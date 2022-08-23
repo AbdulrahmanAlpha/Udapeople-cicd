@@ -1,16 +1,6 @@
 version: 2.1
 
 commands:
-    
-    install_awscli:
-       description: Install AWS CLI 
-       steps: 
-        - run:
-            name: install AWS CLI
-            command: |
-              sudo apt update
-              sudo apt install awscli -y
-
     install_ansible:
         description: Install ansible 
         steps:
@@ -40,7 +30,6 @@ commands:
           type: string
           default: ${CIRCLE_WORKFLOW_ID:0:7}
       steps:
-        - install_awscli
         - run:
            name: Destroy environments
            when: on_fail
@@ -170,7 +159,11 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - install_awscli
+      - run:
+          name: install_awscli
+          command: |
+              sudo apt update
+              sudo apt install awscli -y
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -240,7 +233,11 @@ jobs:
       # Docker image here that supports NodeJS
     steps:
       - checkout
-      - install_awscli 
+      - run:
+          name: install_awscli
+          command: |
+              sudo apt update
+              sudo apt install awscli -y
       - run:
           name: Run migrations
           command: |
@@ -355,7 +352,11 @@ jobs:
       - image: cimg/base:stable 
     steps:
       - checkout
-      - install_awscli
+      - run:
+          name: install_awscli
+          command: |
+              sudo apt update
+              sudo apt install awscli -y
       - install_nodejs
       - run:
           name: Frontend smoke test.
@@ -394,7 +395,11 @@ jobs:
 #       - image: cimg/base:stable 
 #     steps:
 #       - checkout
-        # - install_awscli
+        # - run:
+        #   name: install_awscli
+        #   command: |
+        #       sudo apt update
+        #       sudo apt install awscli -y
         # - install_nodejs
 #       - run:
 #           name: Save Old Workflow ID TO Kvdb.io
@@ -419,7 +424,11 @@ jobs:
 #       - image: cimg/base:stable 
 #     steps:
 #       - checkout
-#       - install_awscli
+#       - run:
+          # name: install_awscli
+          # command: |
+          #     sudo apt update
+          #     sudo apt install awscli -y
 #       - install_nodejs
 #       - run:
 #           name: Get old stack workflow id
