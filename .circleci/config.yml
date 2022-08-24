@@ -404,7 +404,7 @@ jobs:
       - run:
           name: Save Old Workflow ID TO Kvdb.io
           command: |
-            export OLD_WORKFLOW_ID = $(aws cloudformation \
+            export OLD_WORKFLOW_ID=$(aws cloudformation \
                             list-exports --query "Exports[?Name==\'WorkFlowID\'].Value" \
                             --no-paginate --output text)
             echo "Old Workflow ID: $OLD_WORKFLOW_ID"
